@@ -1,0 +1,31 @@
+<button (click)="onClick()" #btn>Increment</button>
+<p appBackColor>Incremented value in parent is: {{value}}</p>
+
+<hr>
+
+<ul *appHasPermission="hasPermission">
+    <ng-container *ngFor="let people of peopleArr; let i=index">
+        <li *ngIf="people.age>20" [ngSwitch]="people.desi">
+            {{i+1}} - {{people.name}} -
+            <ng-container *ngSwitchCase="'SE'">
+                Software Engineer
+            </ng-container>
+            <ng-container *ngSwitchCase="'BA'">
+                Business Analyst
+            </ng-container>
+            <ng-container *ngSwitchCase="'QA'">
+                Quality Analyst
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+                Others
+            </ng-container>
+        </li>
+    </ng-container>
+</ul>
+
+<hr>
+
+<app-child [name1]="name" (parentEmitter)="onOutoutEvent($event)">
+    <h2>It's rendering in Parent</h2>
+</app-child>
+
