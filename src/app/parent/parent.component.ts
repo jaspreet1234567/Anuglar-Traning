@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChildComponent } from '../child/child.component';
+import { PeopleService } from '../services/people.service';
 
 @Component({
   selector: 'app-parent',
@@ -18,37 +19,29 @@ export class ParentComponent implements OnInit, AfterViewInit {
 
   @ViewChild('btn') button: ElementRef;
 
-  peopleArr: any[] = [
-    {
-      name: "Douglas  Pace",
-      age: 33,
-      desi:'SE'
-    },
-    {
-      name: "Mcleod  Mueller",
-      age: 32,
-      desi:'QA'
-    },
-    {
-      name: "Day  Meyers",
-      age: 30,
-      desi:'SE'
-    },
-    {
-      name: "Aguirre  Ellis",
-      age: 34,
-      desi:'BA'
-    },
-    {
-      name: "Cook  Tyson",
-      age: 31,
-      desi:'AC'
-    }
-  ];
+  peopleArr: any[] = [];
 
-  constructor() { }
+  isLoading = true;
+
+  constructor(
+    private peopleService: PeopleService
+  ) {
+
+  }
 
   ngOnInit(): void {
+    debugger;
+    this.peopleService.getPeopleList().subscribe(response => {
+      debugger;
+      this.peopleArr = response;
+      this.isLoading = false;
+    },
+      (err => {
+        console.log(err);
+        debugger;
+        this.isLoading = false;
+      })
+    );
   }
 
   ngAfterViewInit(): void {

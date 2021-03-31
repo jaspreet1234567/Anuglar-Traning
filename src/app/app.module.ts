@@ -8,6 +8,8 @@ import { ChildComponent } from './child/child.component';
 import { ContentComponent } from './content/content.component';
 import { BackColorDirective } from './directives/back-color.directive';
 import { HasPermissionDirective } from './directives/has-permission.directive';
+import { CustomPipe } from './pipes/custom.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,10 +19,12 @@ import { HasPermissionDirective } from './directives/has-permission.directive';
     ContentComponent,
     BackColorDirective,
     HasPermissionDirective,
+    CustomPipe,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

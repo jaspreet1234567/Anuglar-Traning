@@ -3,8 +3,11 @@
 
 <hr>
 
-<ul *appHasPermission="hasPermission">
-    <ng-container *ngFor="let people of peopleArr; let i=index">
+<ng-container *ngIf="isLoading">
+    <span>Loadding data ...</span>
+</ng-container>
+<ul *ngIf="!isLoading">
+    <ng-container *ngFor="let people of peopleArr | custom; let i=index">
         <li *ngIf="people.age>20" [ngSwitch]="people.desi">
             {{i+1}} - {{people.name}} -
             <ng-container *ngSwitchCase="'SE'">
@@ -28,4 +31,3 @@
 <app-child [name1]="name" (parentEmitter)="onOutoutEvent($event)">
     <h2>It's rendering in Parent</h2>
 </app-child>
-
